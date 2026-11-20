@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="uragon_blue">#1E90FF</color>
+    <color name="uragon_blue_dark">#0B62C4</color>
+    <color name="uragon_navy">#0B1A2E</color>
+    <color name="uragon_navy_dark">#060F1C</color>
+    <color name="uragon_surface">#12233B</color>
+    <color name="uragon_surface_light">#1A3150</color>
+    <color name="uragon_text">#E8F0FE</color>
+    <color name="uragon_text_muted">#9FB3C8</color>
+    <color name="uragon_accent">#38BDF8</color>
+    <color name="uragon_gold">#FFD700</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="card_background">#162942</color>
+    <color name="card_selected">#1E4166</color>
+</resources>
