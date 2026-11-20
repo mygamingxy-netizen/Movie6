@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UragonTv - Watch Entertainment</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: radial-gradient(ellipse at top, #0D1B3A 0%, #0A0E1A 50%, #05070F 100%);
+    color: #F5F7FA;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+  header { text-align: center; padding: 40px 0 20px; }
+  .logo {
+    width: 160px; height: 160px; border-radius: 50%;
+    box-shadow: 0 0 60px rgba(30,136,229,0.5), 0 0 120px rgba(30,136,229,0.2);
+    border: 3px solid rgba(66,165,245,0.4);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 60px rgba(30,136,229,0.5), 0 0 120px rgba(30,136,229,0.2); }
+    50% { box-shadow: 0 0 80px rgba(30,136,229,0.8), 0 0 160px rgba(30,136,229,0.4); }
+  }
+  h1 {
+    font-size: 3.2rem; font-weight: 800; margin-top: 20px;
+    background: linear-gradient(135deg, #42A5F5, #64FFDA);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+  .tagline { color: #9CA3AF; font-size: 1.15rem; margin-top: 8px; letter-spacing: 4px; text-transform: uppercase; }
+  .hero { text-align: center; padding: 30px 0; }
+  .hero p { color: #CBD5E1; font-size: 1.1rem; max-width: 700px; margin: 16px auto; line-height: 1.7; }
+  .download-btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, #1E88E5, #0D47A1);
+    color: white; font-size: 1.3rem; font-weight: 700;
+    padding: 18px 48px; border-radius: 50px; text-decoration: none;
+    margin-top: 24px; transition: all 0.3s;
+    box-shadow: 0 10px 40px rgba(30,136,229,0.4);
+    border: 1px solid rgba(66,165,245,0.5);
+  }
+  .download-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 50px rgba(30,136,229,0.6); }
+  .download-btn svg { width: 28px; height: 28px; }
+  .version { color: #64FFDA; font-size: 0.95rem; margin-top: 12px; letter-spacing: 1px; }
+  .features {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px; margin: 60px 0;
+  }
+  .feature {
+    background: rgba(26,34,54,0.6); border: 1px solid rgba(42,52,80,0.6);
+    border-radius: 16px; padding: 28px; backdrop-filter: blur(10px);
+    transition: all 0.3s;
+  }
+  .feature:hover { transform: translateY(-5px); border-color: rgba(66,165,245,0.5); background: rgba(26,34,54,0.85); }
+  .feature-icon { font-size: 2.2rem; margin-bottom: 12px; }
+  .feature h3 { color: #42A5F5; font-size: 1.2rem; margin-bottom: 8px; }
+  .feature p { color: #9CA3AF; font-size: 0.95rem; line-height: 1.6; }
+  .platforms { display: flex; gap: 16px; justify-content: center; margin: 30px 0; flex-wrap: wrap; }
+  .platform {
+    background: rgba(26,34,54,0.5); border: 1px solid rgba(42,52,80,0.5);
+    padding: 12px 24px; border-radius: 30px; color: #CBD5E1; font-size: 0.95rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  footer { text-align: center; padding: 40px 0; color: #64748B; font-size: 0.85rem; border-top: 1px solid rgba(42,52,80,0.3); margin-top: 40px; }
+  .screens { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
+  .screen {
+    background: rgba(10,14,26,0.8); border: 1px solid rgba(42,52,80,0.4);
+    border-radius: 16px; padding: 16px; aspect-ratio: 16/10;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .screen::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(30,136,229,0.1), rgba(100,255,218,0.05));
+  }
+  .screen span { position: relative; color: #42A5F5; font-weight: 600; font-size: 1.1rem; }
+  @media (max-width: 600px) { h1 { font-size: 2.2rem; } .screens { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <img src="uragon_logo_512.png" alt="UragonTv" class="logo">
+    <h1>URAGON TV</h1>
+    <p class="tagline">Watch Entertainment</p>
+  </header>
+
+  <div class="platforms">
+    <div class="platform">📺 Android TV</div>
+    <div class="platform">📱 Android Mobile</div>
+    <div class="platform">📽️ Movies & Series</div>
+    <div class="platform">📡 Live IPTV</div>
+  </div>
+
+  <div class="hero">
+    <p>UragonTv brings unlimited entertainment to your Android TV and mobile device. Stream live TV channels, movies, and TV series from curated global sources — all in one beautifully designed app.</p>
+    <a href="UragonTv.apk" class="download-btn" download>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      Download UragonTv APK
+    </a>
+    <p class="version">Version 1.0.0 • Works on Android TV & Mobile</p>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📡</div>
+      <h3>Live IPTV</h3>
+      <p>Hundreds of live TV channels worldwide — news, sports, movies, music, and more from reliable curated playlists.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎬</div>
+      <h3>Movies On Demand</h3>
+      <p>Browse trending and popular movies powered by IMDb metadata, with instant streaming playback.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📺</div>
+      <h3>TV Series</h3>
+      <p>Watch full TV series with season and episode selection — pick up right where you left off.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⭐</div>
+      <h3>Favorites</h3>
+      <p>Save your favorite channels, movies, and shows for quick access anytime.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔍</div>
+      <h3>Powerful Search</h3>
+      <p>Search across movies and series instantly with IMDb-backed results.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎨</div>
+      <h3>Premium Design</h3>
+      <p>Clean dark interface with blue accents, optimized for both TV remote and touch navigation.</p>
+    </div>
+  </div>
+
+  <div class="screens">
+    <div class="screen"><span>📱 Mobile Interface</span></div>
+    <div class="screen"><span>📺 Android TV Interface</span></div>
+  </div>
+
+  <footer>
+    <p>© 2026 UragonTv — Watch Entertainment. All rights reserved.</p>
+    <p style="margin-top:8px;">This app aggregates publicly available streams. For educational/entertainment use.</p>
+  </footer>
+</div>
+</body>
+</html>

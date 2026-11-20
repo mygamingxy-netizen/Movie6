@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UragonTv — Admin Source List</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #05070F; color: #CBD5E1; min-height: 100vh;
+  }
+  /* Login screen */
+  #login {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at center, #0D1B3A, #05070F);
+    z-index: 100;
+  }
+  .login-box {
+    background: rgba(10,14,26,0.9); border: 1px solid #1E88E5; border-radius: 16px;
+    padding: 40px; text-align: center; box-shadow: 0 0 60px rgba(30,136,229,0.3);
+  }
+  .login-box h1 { color: #42A5F5; font-size: 1.6rem; margin-bottom: 8px; }
+  .login-box p { color: #64748B; margin-bottom: 20px; font-size: 0.85rem; }
+  #passInput {
+    width: 100%; padding: 12px 16px; background: #0A0E1A; border: 1px solid #2A3450;
+    border-radius: 8px; color: #F5F7FA; font-size: 1rem; margin-bottom: 12px; outline: none;
+  }
+  #passInput:focus { border-color: #1E88E5; }
+  #loginBtn {
+    width: 100%; padding: 12px; background: linear-gradient(135deg, #1E88E5, #0D47A1);
+    border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 1rem;
+  }
+  #loginBtn:hover { opacity: 0.9; }
+  #loginError { color: #EF4444; font-size: 0.85rem; margin-top: 8px; min-height: 18px; }
+  /* Main content */
+  #content { display: none; padding: 30px 20px; max-width: 1200px; margin: 0 auto; }
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px; background: #0A0E1A; border-radius: 12px; margin-bottom: 24px;
+    border: 1px solid #2A3450;
+  }
+  .topbar h1 { color: #42A5F5; font-size: 1.3rem; }
+  .topbar button {
+    background: #1A2236; color: #F5F7FA; border: 1px solid #2A3450; padding: 8px 16px;
+    border-radius: 8px; cursor: pointer; font-family: inherit;
+  }
+  .section {
+    background: #0A0E1A; border: 1px solid #2A3450; border-radius: 12px; padding: 24px; margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #64FFDA; font-size: 1.1rem; margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 1px solid #2A3450;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #1A2236; font-size: 0.85rem; }
+  th { color: #42A5F5; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+  td a { color: #64FFDA; word-break: break-all; text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;
+  }
+  .badge-live { background: #E53935; color: white; }
+  .badge-vod { background: #1E88E5; color: white; }
+  .badge-api { background: #7B1FA2; color: white; }
+  .badge-src { background: #2E7D32; color: white; }
+  .code-block {
+    background: #05070F; border: 1px solid #2A3450; border-radius: 8px; padding: 16px;
+    font-family: 'Courier New', monospace; color: #64FFDA; word-break: break-all; margin-top: 10px;
+  }
+  .summary { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat {
+    background: #0A0E1A; border: 1px solid #2A3450; border-radius: 12px; padding: 16px 24px; flex: 1; min-width: 140px;
+  }
+  .stat .num { font-size: 1.8rem; color: #42A5F5; font-weight: bold; }
+  .stat .label { color: #64748B; font-size: 0.8rem; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-box">
+    <h1>🔒 UragonTv Admin</h1>
+    <p>Restricted area — admin access only</p>
+    <input type="password" id="passInput" placeholder="Enter admin password" autocomplete="off">
+    <button id="loginBtn">Unlock</button>
+    <div id="loginError"></div>
+  </div>
+</div>
+
+<div id="content">
+  <div class="topbar">
+    <h1>🐉 UragonTv — Source & Code Registry</h1>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="num" id="statIptv">0</div><div class="label">IPTV Sources</div></div>
+    <div class="stat"><div class="num" id="statVod">0</div><div class="label">VOD Providers</div></div>
+    <div class="stat"><div class="num" id="statRepo">0</div><div class="label">GitHub Repos</div></div>
+    <div class="stat"><div class="num" id="statApi">1</div><div class="label">API Keys</div></div>
+  </div>
+
+  <div class="section">
+    <h2>🔑 API Keys</h2>
+    <table>
+      <tr><th>Service</th><th>Key</th><th>Purpose</th></tr>
+      <tr>
+        <td>IMDb API</td>
+        <td><div class="code-block">w7gDGCa6du4uvcNO5K8Vs4puM13C0yuS</div></td>
+        <td>Movie & series metadata, search</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>📡 IPTV M3U Sources (Live TV + VOD Channels)</h2>
+    <table id="iptvTable">
+      <tr><th>#</th><th>Name</th><th>URL</th><th>Type</th></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🎬 VOD Stream Providers (Movies & Series Embeds)</h2>
+    <table id="vodTable">
+      <tr><th>Provider</th><th>Movie URL Template</th><th>Series URL Template</th></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>📦 Referenced GitHub Repositories (Deduplicated)</h2>
+    <table id="repoTable">
+      <tr><th>#</th><th>Repository</th><th>Category</th></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Direct Stream / Kodi Repo Links</h2>
+    <table id="linkTable">
+      <tr><th>#</th><th>Name</th><th>URL</th></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>🧹 Deduplication Log</h2>
+    <p style="color:#9CA3AF; margin-bottom:10px;">Duplicate sources removed from the original list:</p>
+    <ul id="dedupeList" style="color:#F59E0B; padding-left:20px; line-height:1.8;"></ul>
+  </div>
+
+</div>
+
+<script>
+// Admin password (change this to your own)
+const ADMIN_PASSWORD = "uragonadmin2026";
+
+const iptvSources = [
+  ["All Channels", "https://iptv-org.github.io/iptv/index.m3u"],
+  ["Movies", "https://iptv-org.github.io/iptv/categories/movies.m3u"],
+  ["News", "https://iptv-org.github.io/iptv/categories/news.m3u"],
+  ["Documentary", "https://iptv-org.github.io/iptv/categories/documentary.m3u"],
+  ["Music", "https://iptv-org.github.io/iptv/categories/music.m3u"],
+  ["Comedy", "https://iptv-org.github.io/iptv/categories/comedy.m3u"],
+  ["United States", "https://iptv-org.github.io/iptv/countries/us.m3u"],
+  ["Tubi VOD", "https://raw.githubusercontent.com/BuddyChewChew/app-m3u-generator/refs/heads/main/playlists/tubi_all.m3u"],
+  ["Rakuten UK", "https://www.apsattv.com/rakutentv-uk.m3u"],
+  ["Rakuten FR", "https://www.apsattv.com/rakutentv-fr.m3u"],
+  ["Xiaomi", "https://www.apsattv.com/xiaomi.m3u"],
+];
+
+const vodProviders = [
+  ["Vidsrc.to", "https://vidsrc.to/embed/movie/%s", "https://vidsrc.to/embed/tv/%s/%s/%s"],
+  ["Vidsrc.xyz", "https://vidsrc.xyz/embed/movie/%s", "https://vidsrc.xyz/embed/tv/%s/%s/%s"],
+  ["MultiEmbed", "https://multiembed.mov/?video_id=%s&tmdb=1", "https://multiembed.mov/?video_id=%s&tmdb=1&s=%s&e=%s"],
+];
+
+const repos = [
+  ["TorhamDev/Better-Movie-finder", "Movie discovery"],
+  ["iptv-org/iptv", "IPTV playlists"],
+  ["truelockmc/streambert", "Streaming app"],
+  ["matjava/xtream-playlist", "Xtream playlist parser"],
+  ["Davidona/StreamVault-IPTV", "IPTV player"],
+  ["IMDb-API/IMDbApiLib", "IMDb API library"],
+  ["xrce/mls", "Movie streaming"],
+  ["tuhinpal/imdb-api", "IMDb API"],
+  ["mesamirh/MovieBox-Tui", "MovieBox terminal"],
+  ["Uablebot/FileStore-And-LinkShortner-Bot", "File store bot"],
+  ["P0SSIBLE-0/moviemax", "Movie streaming"],
+  ["meetkool/Nightflix", "Streaming app"],
+  ["solo12345689/moviebox-internal-api", "MovieBox API"],
+];
+
+const directLinks = [
+  ["Magnetic Kodi Repo", "https://magnetic.website/repo/"],
+  ["SlyGuy Repo", "https://k.slyguy.xyz/"],
+  ["SlyGuy UK", "https://slyguy.uk/"],
+  ["Bugatsinho Repo", "https://bugatsinho.github.io/repo/"],
+  ["The Loop", "https://loopaddon.uk/theloop/"],
+  ["The Loop (short)", "https://tinyurl.com/TheL48"],
+  ["Th3L48 Repo", "https://www.midian.appboxes.co/wolfyB/Th3L48/repo/"],
+  ["Team Crew", "https://team-crew.github.io/"],
+  ["MyLostSoulSpace", "https://mylostsoulspace.co.uk/repo/"],
+  ["Elementum", "https://elementum.surge.sh"],
+  ["CocoJoe", "https://cocojoe2411.github.io/"],
+  ["UmbrellaPlug", "https://umbrellaplug.github.io/"],
+  ["GoldenFreddy/Hooty", "https://goldenfreddy0703.github.io/repository.hooty/"],
+  ["Angelitto Repo", "https://angelitto2005.github.io/repository.angelitto/"],
+  ["FMovies Ultra", "https://fmoviesultra.com/movie/"],
+];
+
+const deduped = [
+  "https://github.com/iptv-org/iptv.git (appeared 2x → kept 1)",
+  "https://github.com/truelockmc/streambert.git (appeared 2x → kept 1)",
+  "https://github.com/matjava/xtream-playlist.git (appeared 2x → kept 1)",
+  "https://github.com/mesamirh/MovieBox-Tui.git (appeared 2x → kept 1)",
+  "https://team-crew.github.io/ (appeared 2x → kept 1)",
+];
+
+function render() {
+  const iptvT = document.getElementById('iptvTable');
+  iptvSources.forEach((s, i) => {
+    iptvT.innerHTML += `<tr><td>${i+1}</td><td>${s[0]}</td><td><a href="${s[1]}" target="_blank">${s[1]}</a></td><td><span class="badge badge-live">LIVE</span></td></tr>`;
+  });
+  document.getElementById('statIptv').textContent = iptvSources.length;
+
+  const vodT = document.getElementById('vodTable');
+  vodProviders.forEach(p => {
+    vodT.innerHTML += `<tr><td>${p[0]}</td><td><code>${p[1]}</code></td><td><code>${p[2]}</code></td></tr>`;
+  });
+  document.getElementById('statVod').textContent = vodProviders.length;
+
+  const repoT = document.getElementById('repoTable');
+  repos.forEach((r, i) => {
+    const url = "https://github.com/" + r[0];
+    repoT.innerHTML += `<tr><td>${i+1}</td><td><a href="${url}" target="_blank">${r[0]}</a></td><td><span class="badge badge-src">${r[1]}</span></td></tr>`;
+  });
+  document.getElementById('statRepo').textContent = repos.length;
+
+  const linkT = document.getElementById('linkTable');
+  directLinks.forEach((l, i) => {
+    linkT.innerHTML += `<tr><td>${i+1}</td><td>${l[0]}</td><td><a href="${l[1]}" target="_blank">${l[1]}</a></td></tr>`;
+  });
+
+  const dl = document.getElementById('dedupeList');
+  deduped.forEach(d => { dl.innerHTML += `<li>${d}</li>`; });
+}
+
+// Login
+document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+document.getElementById('passInput').addEventListener('keypress', e => { if(e.key==='Enter') attemptLogin(); });
+
+function attemptLogin() {
+  const v = document.getElementById('passInput').value;
+  if (v === ADMIN_PASSWORD) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('loginError').textContent = '';
+    render();
+  } else {
+    document.getElementById('loginError').textContent = 'Incorrect password.';
+  }
+}
+
+function logout() {
+  document.getElementById('content').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+  document.getElementById('passInput').value = '';
+}
+</script>
+</body>
+</html>

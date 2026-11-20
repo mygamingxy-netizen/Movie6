@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="uragon_dark">#0A0E1A</color>
+    <color name="uragon_panel">#111827</color>
+    <color name="uragon_card">#1A2236</color>
+    <color name="uragon_blue">#1E88E5</color>
+    <color name="uragon_blue_light">#42A5F5</color>
+    <color name="uragon_blue_deep">#0D47A1</color>
+    <color name="uragon_white">#F5F7FA</color>
+    <color name="uragon_text_secondary">#9CA3AF</color>
+    <color name="uragon_accent">#64FFDA</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+</resources>

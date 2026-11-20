@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.UragonTv" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/uragon_blue</item>
+        <item name="colorPrimaryDark">@color/uragon_blue_deep</item>
+        <item name="colorAccent">@color/uragon_blue_light</item>
+        <item name="android:windowBackground">@color/uragon_dark</item>
+        <item name="android:statusBarColor">@color/uragon_dark</item>
+        <item name="android:navigationBarColor">@color/uragon_dark</item>
+    </style>
+
+    <style name="Theme.UragonTv.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/uragon_dark</item>
+        <item name="android:statusBarColor">@color/uragon_dark</item>
+    </style>
+
+    <style name="Theme.UragonTv.FullScreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+</resources>
